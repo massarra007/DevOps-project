@@ -1,0 +1,71 @@
+pipeline {
+  agent any
+  environment {
+    registry = 'massarra/clinique'
+    registryCredential = 'dockerHub'
+  }
+  parameters {
+  	string(name: 'BRANCH_NAME', defaultValue: "${scm.branches[0].name}", description: 'Git branch name')
+      }
+    stages {
+        stage('Github') {
+          when {
+              expression {
+                  params.BRANCH_NAME.contains('release-')
+              }
+          }
+          steps {
+            script {
+                branchName = params.BRANCH_NAME
+                echo "branch: ${branchName}"
+                git branch: branchName,
+                credentialsId:'credentials-git',
+                url:'https://github.com/massarrabj/DevOps.git'
+                echo "Current branch name: ${branchName}"
+            }
+          }
+        }
+        stage ('Docker Build'){
+            when {
+                 expression {
+                        branchName.contains('release-')
+                    }
+             }
+            steps {
+                script {
+                    sh 'mvn package -DskipTests'
+                    echo '--- Preparing to build image ---'
+                    sh "docker build -t ${registry}:${branchName} ."
+                    echo "--- Docker build completed ---"
+
+                    sh 'docker login -u massarra --password ingmass180199'
+                    sh "docker push ${registry}:${branchName}"
+                    echo "--- Docker push completed ---"
+                }
+            }
+        }
+        stage ('Docker compose'){
+            when {
+                 expression {
+                        branchName.contains('release-')
+                    }
+             }
+            steps{
+                script {
+                    sh '''
+                      container_ids=$(docker ps -q --filter "publish=8087/tcp" --filter "publish=3306/tcp")
+                      if [ -n "$container_ids" ]; then
+                        echo "Stopping and removing containers..."
+                        docker stop $container_ids
+                        docker rm $container_ids
+                      else
+                        echo "No containers found on port 8087 ."
+                      fi
+                    '''
+                    writeFile file: ".env.${BRANCH_NAME}", text: "BRANCH_NAME=${BRANCH_NAME}"
+                    sh "docker compose --env-file .env.${BRANCH_NAME} up -d"
+                }
+            }
+        }
+    }
+}

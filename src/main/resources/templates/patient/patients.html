@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="template3">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+
+</head>
+<body style="background-img:url('https://previews.123rf.com/images/winnievinzence/winnievinzence1704/winnievinzence170400030/83322843-hospital-blur-background.jpg'); background-size:cover">
+
+
+
+<div layout:fragment="content1">
+
+<div class=" container mt-2 " >
+    <div class="card">
+        <div class="card-header">LISTE DES PATIENTS</div>
+        <div class="card-body">
+            <div>
+
+                <form class="form-inline my-2 my-lg-0" method="get" th:action="@{/user/index}">
+                    <input type="text" name="keyword" th:value="${keyword}" placeholder="chercher un patient">
+                    <button class="btn btn-outline-info" type="submit">Rechercher</button>
+                </form>
+            </div>
+
+            <table class="table table-hover" >
+                <thead>
+                <tr class="table-warning">
+        <th scope="col">Id</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Malade</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Supprimer</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Modifier</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Détails</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each= "p:${listpatients}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.nom}"></td>
+        <td th:text="${p.malade}"></td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <a onclick="return confirm('Etes vous sur ? ')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id},keyword=${keyword} ,page=${currentPage})}">
+                Supprimer
+            </a>
+        </td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <a  class="btn btn-success"  th:href="@{/admin/EditPatient(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                Modifier
+            </a>
+        </td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <a class="btn btn-info" th:href="@{/admin/ShowPatient(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                Voir
+            </a>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+            <ul class=" nav nav-pills">
+                <li th:each="page, status:${pages}">
+                    <a th:class="${status.index==currentPage}? 'btn btn-primary ms-1' : 'btn btn-outline-primary ms-1' "
+                       th:href="@{/user/index(page=${status.index}, keyword=${keyword})}"
+                       th:text="${status.index}"></a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+</div>
+
+</body>
+</html>

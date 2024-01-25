@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mysql-db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    networks:
+      - app-mysql-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=massarra
+      - MYSQL_DATABASE=clinique
+    volumes:
+      - /home/devops/mysql:/var/lib/mysql
+
+      
+
+  app-container:
+    image: massarra/clinique:${BRANCH_NAME}
+    ports:
+      - "8087:8087"
+    hostname: clinique
+    container_name: ${BRANCH_NAME}
+    networks:
+      - app-mysql-network
+    depends_on:
+      - mysql-db
+
+networks:
+  app-mysql-network:
+    driver: bridge

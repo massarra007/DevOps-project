@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    stages {
+        stage('Github checkout') {
+            steps {
+              script {
+                  git branch: scm.branches[0].name,
+                  credentialsId:'credentials-git',
+                  url:'https://github.com/massarrabj/DevOps.git'
+              }
+            }
+        }
+        stage ('MNV BUILD') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+                echo 'Build stage done'
+            }
+        }
+        stage ('MNV Test') {
+            steps {
+                sh 'mvn test'
+                echo 'Test stage done'
+            }
+        }
+        stage ('MNV SonarQube Test Code') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://20.111.33.66:9000/ -Dsonar.login=admin -Dsonar.password=massarra'
+                echo 'Sonar stage done'
+            }
+        }
+    }
+}

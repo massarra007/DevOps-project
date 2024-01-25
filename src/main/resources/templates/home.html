@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="template3"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+
+</head>
+<body>
+<div layout:fragment="content1">
+
+  <div id="home" class="parallax first-section wow fadeIn" data-stellar-background-ratio="0.4" th:style="' background-image:url('+ @{/<images/slider-bg.png>}+ ');'">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="text-contant">
+            <h2>
+              <span class="center"><span class="icon"><img th:src="@{/images/icon-logo.png}" alt="#" /></span></span>
+              <a href="" class="typewrite" data-period="2000" data-type='[ "Welcome to Life Care", "We Care Your Health", "We are Expert!" ]'>
+                <span class="wrap"></span>
+              </a>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- end container -->
+  </div>
+  <!-- end section -->
+  <div id="time-table" class="time-table-section">
+    <div class="container">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="service-time one" style="background:#2895f1;">
+            <span class="info-icon"><i class="fa fa-ambulance" aria-hidden="true"></i></span>
+            <h3>Emergency Case</h3>
+            <p>Dignissimos ducimus qui blanditii sentium volta tum deleniti atque cori as quos dolores et quas mole.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="service-time middle" style="background:#0071d1;">
+            <span class="info-icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+            <h3>Working Hours</h3>
+            <div class="time-table-section">
+              <ul>
+                <li><span class="left">Monday - Friday</span><span class="right">8.00 – 18.00</span></li>
+                <li><span class="left">Saturday</span><span class="right">8.00 – 16.00</span></li>
+                <li><span class="left">Sunday</span><span class="right">8.00 – 13.00</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="service-time three" style="background:#0060b1;">
+            <span class="info-icon"><i class="fa fa-hospital-o" aria-hidden="true"></i></span>
+            <h3>Clinic Timetable</h3>
+            <p>Dignissimos ducimus qui blanditii sentium volta tum deleniti atque cori as quos dolores et quas mole.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="about" class="section wow fadeIn">
+    <div class="container">
+      <div class="heading">
+        <span class="icon-logo"><img th:src="@{/images/icon-logo.png}" alt="#"></span>
+        <h2>The Specialist Clinic</h2>
+      </div>
+      <!-- end title -->
+
+      <!-- end row -->
+      <hr class="hr1">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="service-widget">
+            <div class="post-media wow fadeIn">
+              <a th:href="@{/images/clinic_01.jpg}" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
+              <img th:src="@{/images/clinic_01.jpg}" alt="" class="img-responsive">
+            </div>
+            <h3>Digital Control Center</h3>
+          </div>
+          <!-- end service -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="service-widget">
+            <div class="post-media wow fadeIn">
+              <a th:href="@{/images/clinic_02.jpg}" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
+              <img th:src="@{/images/clinic_02.jpg}" alt="" class="img-responsive">
+            </div>
+            <h3>Hygienic Operating Room</h3>
+          </div>
+          <!-- end service -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="service-widget">
+            <div class="post-media wow fadeIn">
+              <a th:href="@{/images/clinic_03.jpg}" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
+              <img th:src="@{/images/clinic_03.jpg}" alt="" class="img-responsive">
+            </div>
+            <h3>Specialist Physicians</h3>
+          </div>
+          <!-- end service -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="service-widget">
+            <div class="post-media wow fadeIn">
+              <a th:href="@{/images/clinic_01.jpg}" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
+              <img th:src="@{/images/clinic_01.jpg}" alt="" class="img-responsive">
+            </div>
+            <h3>Digital Control Center</h3>
+          </div>
+          <!-- end service -->
+        </div>
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- end container -->
+  </div>
+
+
+
+  <footer id="footer" class="footer-area wow fadeIn">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="logo padding">
+            <a href=""><img src="images/logo.png" alt=""></a>
+            <p>Locavore pork belly scen ester pine est chill wave microdosing pop uple itarian cliche artisan.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-info padding">
+            <h3>CONTACT US</h3>
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i> PO Box 16122 Collins Street West Victoria 8007 Australia</p>
+            <p><i class="fa fa-paper-plane" aria-hidden="true"></i> info@gmail.com</p>
+            <p><i class="fa fa-phone" aria-hidden="true"></i> (+1) 800 123 456</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="subcriber-info">
+            <h3>SUBSCRIBE</h3>
+            <p>Get healthy news, tip and solutions to your problems from our experts.</p>
+            <div class="subcriber-box">
+              <form id="mc-form" class="mc-form">
+                <div class="newsletter-form">
+                  <input type="email" autocomplete="off" id="mc-email" placeholder="Email address" class="form-control" name="EMAIL">
+                  <button class="mc-submit" type="submit"><i class="fa fa-paper-plane"></i></button>
+                  <div class="clearfix"></div>
+                  <!-- mailchimp-alerts Start -->
+                  <div class="mailchimp-alerts">
+                    <div class="mailchimp-submitting"></div>
+                    <!-- mailchimp-submitting end -->
+                    <div class="mailchimp-success"></div>
+                    <!-- mailchimp-success end -->
+                    <div class="mailchimp-error"></div>
+                    <!-- mailchimp-error end -->
+                  </div>
+                  <!-- mailchimp-alerts end -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="copyright-area wow fadeIn">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="footer-text">
+            <p>© 2018 Lifecare. All Rights Reserved.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="social">
+            <ul class="social-links">
+              <li><a href=""><i class="fa fa-rss"></i></a></li>
+              <li><a href=""><i class="fa fa-facebook"></i></a></li>
+              <li><a href=""><i class="fa fa-twitter"></i></a></li>
+              <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+              <li><a href=""><i class="fa fa-youtube"></i></a></li>
+              <li><a href=""><i class="fa fa-pinterest"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

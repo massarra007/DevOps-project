@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+    parameters {
+    	string(name: 'BRANCH_NAME', defaultValue: "${scm.branches[0].name}", description: 'Git branch name')
+    	string(name: 'CHANGE_ID', defaultValue: '', description: 'Git change ID for merge requests')
+    }
+    stages {
+        stage('Github') {
+            when {
+                expression {
+                    (params.CHANGE_ID != null) && (params.BRANCH_NAME == 'develop')
+                }
+            }
+            steps {
+                script {
+                    branchName = params.BRANCH_NAME
+                    changeId = params.CHANGE_ID
+                    echo "changeId: ${changeId}"
+                    
+                    git branch: branchName,
+                    credentialsId:'credentials-git',
+                    url:'https://github.com/massarrabj/DevOps.git'
+                    echo "Current branch name: ${branchName}"
+                }
+
+            }
+        }
+        stage ('MNV BUILD') {
+            when {
+                expression {
+                    (params.CHANGE_ID != null) && (params.BRANCH_NAME == 'develop')
+                }
+            }   
+            steps {
+                sh 'mvn clean package -DskipTests'
+                echo 'Build stage done'
+            }
+        }
+        stage ('MNV Test') {
+            when {
+                expression {
+                    (params.CHANGE_ID != null) && (params.BRANCH_NAME == 'develop')
+                }
+            }   
+            steps {
+                sh 'mvn test'
+                echo 'Test stage done'
+            }
+        }
+        stage ('MNV SonarQube Test Code') {
+            when {
+                expression {
+                    (params.CHANGE_ID != null) && (params.BRANCH_NAME == 'develop')
+                }
+            }   
+
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://20.111.33.66:9000/ -Dsonar.login=admin -Dsonar.password=massarra'
+                echo 'Sonar stage done'
+            }
+        }
+    }
+}

@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+   <title>Health Management</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+   <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all" />
+   <link rel="stylesheet" th:href="@{/css/jquery-ui.css}" />
+   <link th:href="@{//fonts.googleapis.com/css?family=Convergence}" rel="stylesheet">
+   <link th:href="@{//fonts.googleapis.com/css?family=ABeeZee:400,400i}" rel="stylesheet">
+</head>
+<body>
+<div>
+   <div class="banner">
+      <div class="container">
+         <div class="col-md-4 agile1">
+            <nav class="navbar navbar-default">
+               <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                  <nav class="stroke">
+                     <ul class="nav navbar-nav">
+                        <a class="navbar-link active" th:href="@{/user/index}">
+                           <img  th:src="@{/logo.png}"/>
+                        </a>
+                        <!-- patient -->
+
+                        <li  class="dropdown menu__item menu__item--current">
+                           <a  th:href="@{/user/index}" class="dropdown-toggle menu__link"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                              Patients
+                              <span class="caret"></span></a>
+                           <ul class="dropdown-menu">
+                              <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/formPatients}">Nouveau</a></li>
+                              <li><a  th:href="@{/user/index}">Liste</a></li>
+                           </ul>
+                        </li>
+                        <!-- med -->
+
+                        <li class="dropdown menu__item menu__item--current">
+                           <a th:href="@{/user/medecins}" class="dropdown-toggle menu__link"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                              Medecins
+                              <span class="caret"></span></a>
+                           <ul class="dropdown-menu">
+                              <li><a  th:href="@{/user/medecins}">Liste</a></li>
+                              <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/formMedecin}">Nouveau</a></li>
+                              <li><a  th:href="@{/user/medecins}">Chercher</a></li>
+                           </ul>
+                        </li>
+                        <!-- rDv -->
+
+
+                        <li class="dropdown menu__item menu__item--current">
+                           <a th:href="@{/user/rdv}" class="dropdown-toggle menu__link"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                              Rendez-vous
+                              <span class="caret"></span></a>
+                           <ul class="dropdown-menu">
+                              <li><a th:href="@{/user/rdv}">Liste</a></li>
+                              <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/formRendezVous}">Nouveau</a></li>
+                           </ul>
+                        </li>
+
+                        <!-- Consultations -->
+
+                        <li class="dropdown menu__item menu__item--current">
+                           <a th:href="@{/user/consultations}" class="dropdown-toggle menu__link"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                              Consultations
+                              <span class="caret"></span></a>
+                           <ul class="dropdown-menu">
+                              <li><a th:href="@{/user/consultations}">Liste</a></li>
+                              <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/formConsultation}">Nouveau</a></li>
+                              <li><a th:href="@{/user/consultations}">Chercher</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </nav>
+
+               </div>
+            </nav>
+         </div>         <div class="col-md-4 agile1">
+
+         <section layout:fragment="content1">
+
+         </section>
+      </div>
+
+
+      </div>
+   </div>
+
+</div>
+</div>
+
+
+
+
+<!-- Footer -->
+<div class="footer w3ls">
+   <div class="container">
+      <div class="footer-main">
+         <div class="footer-top">
+
+            <div class="clearfix"> </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+</body>
+</html>
